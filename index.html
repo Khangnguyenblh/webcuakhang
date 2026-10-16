@@ -441,6 +441,364 @@
         </div>
     </section>
 
+
+<!-- PHẦN TRẮC NGHIỆM TƯƠNG TÁC -->
+<section id="quiz">
+    <h2>9. Trắc nghiệm mạch RLC</h2>
+    <p>Chọn đáp án A, B, C hoặc D. Mỗi câu có một đáp án đúng.</p>
+
+    <div class="quiz-info">
+        <span id="progress">Câu 1/6</span>
+        <span id="score">Điểm: 0/6</span>
+    </div>
+
+    <div class="progress-bar">
+        <div id="progressFill"></div>
+    </div>
+
+    <h3 id="question"></h3>
+    <div id="options"></div>
+
+    <div id="feedback" aria-live="polite"></div>
+
+    <button id="nextBtn" type="button" onclick="nextQuestion()"
+        disabled>
+        Câu tiếp theo →
+    </button>
+
+    <button id="restartBtn" type="button" onclick="restartQuiz()"
+        hidden>
+        Làm lại từ đầu
+    </button>
+</section>
+
+<style>
+    .quiz-info {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        font-weight: bold;
+        color: #1565c0;
+    }
+
+    .progress-bar {
+        height: 9px;
+        background: #dbeafe;
+        border-radius: 10px;
+        margin: 12px 0 20px;
+        overflow: hidden;
+    }
+
+    #progressFill {
+        height: 100%;
+        width: 0%;
+        background: #1565c0;
+        transition: width 0.3s;
+    }
+
+    #question {
+        line-height: 1.7;
+    }
+
+    .answer-btn {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        margin: 10px 0;
+        text-align: left;
+        border: 2px solid #dbeafe;
+        border-radius: 9px;
+        background: white;
+        color: #1e293b;
+        font-size: 16px;
+        cursor: pointer;
+        line-height: 1.7;
+    }
+
+    .answer-btn:hover:not(:disabled) {
+        border-color: #1565c0;
+        background: #f0f7ff;
+    }
+
+    .answer-btn:disabled {
+        cursor: default;
+        opacity: 1;
+    }
+
+    .answer-btn.correct {
+        border-color: #16a34a;
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .answer-btn.wrong {
+        border-color: #dc2626;
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    #feedback {
+        margin-top: 18px;
+        line-height: 1.8;
+    }
+
+    #feedback:empty {
+        display: none;
+    }
+
+    .feedback-box {
+        padding: 15px;
+        border-radius: 9px;
+    }
+
+    .feedback-correct {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .feedback-wrong {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    #nextBtn, #restartBtn {
+        margin-top: 15px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        background: #1565c0;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #nextBtn:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+    }
+</style>
+
+<script>
+const questions = [
+    {
+        q: "Câu 1. Công thức tính cảm kháng của cuộn cảm thuần là gì?",
+        options: [
+            "\\(Z_L=\\omega L\\)",
+            "\\(Z_L=\\dfrac{1}{\\omega L}\\)",
+            "\\(Z_L=\\omega C\\)",
+            "\\(Z_L=R+L\\)"
+        ],
+        answer: 0,
+        explanation:
+            "Đáp án A đúng vì cảm kháng được tính bằng Z_L = ωL, trong đó ω là tần số góc và L là độ tự cảm. Cảm kháng có đơn vị ôm (Ω)."
+    },
+    {
+        q: "Câu 2. Công thức tính dung kháng của tụ điện là gì?",
+        options: [
+            "\\(Z_C=\\omega C\\)",
+            "\\(Z_C=\\dfrac{1}{\\omega C}\\)",
+            "\\(Z_C=\\omega L\\)",
+            "\\(Z_C=RC\\)"
+        ],
+        answer: 1,
+        explanation:
+            "Đáp án B đúng vì dung kháng Z_C = 1/(ωC). Khi tần số góc ω tăng, dung kháng giảm nếu điện dung C không đổi."
+    },
+    {
+        q: "Câu 3. Tổng trở của mạch RLC nối tiếp được tính theo công thức nào?",
+        options: [
+            "\\(Z=R+Z_L+Z_C\\)",
+            "\\(Z=\\sqrt{R^2+(Z_L+Z_C)^2}\\)",
+            "\\(Z=\\sqrt{R^2+(Z_L-Z_C)^2}\\)",
+            "\\(Z=R(Z_L-Z_C)\\)"
+        ],
+        answer: 2,
+        explanation:
+            "Đáp án C đúng. Điện áp trên R vuông pha với phần điện áp phản kháng tổng hợp (U_L − U_C), nên Z = √[R² + (Z_L − Z_C)²]."
+    },
+    {
+        q: "Câu 4. Mạch RLC nối tiếp xảy ra cộng hưởng khi nào?",
+        options: [
+            "\\(R=Z_L\\)",
+            "\\(R=Z_C\\)",
+            "\\(Z_L=Z_C\\)",
+            "\\(Z=0\\)"
+        ],
+        answer: 2,
+        explanation:
+            "Đáp án C đúng vì cộng hưởng xảy ra khi cảm kháng bằng dung kháng. Khi đó tổng trở Z = R và dòng điện cùng pha với điện áp toàn mạch."
+    },
+    {
+        q: "Câu 5. Khi cộng hưởng và điện áp hiệu dụng U không đổi, cường độ dòng điện hiệu dụng bằng bao nhiêu?",
+        options: [
+            "\\(I=\\dfrac{U}{Z}\\), với Z = R",
+            "\\(I=UR\\)",
+            "\\(I=\\dfrac{R}{U}\\)",
+            "\\(I=0\\)"
+        ],
+        answer: 0,
+        explanation:
+            "Đáp án A đúng. Khi cộng hưởng, Z = R nên theo định luật Ôm: I = U/Z = U/R. Với R không đổi, dòng điện đạt giá trị lớn nhất."
+    },
+    {
+        q: "Câu 6. Công thức tính công suất trung bình của mạch RLC là gì?",
+        options: [
+            "\\(P=UI\\sin\\varphi\\)",
+            "\\(P=UI\\cos\\varphi\\)",
+            "\\(P=U/I\\)",
+            "\\(P=I^2Z\\)"
+        ],
+        answer: 1,
+        explanation:
+            "Đáp án B đúng vì công suất trung bình P = UI cosφ. Với mạch RLC lý tưởng, công suất tiêu thụ trung bình trên điện trở là P = I²R."
+    }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const feedbackEl = document.getElementById("feedback");
+const progressEl = document.getElementById("progress");
+const scoreEl = document.getElementById("score");
+const progressFill = document.getElementById("progressFill");
+const nextBtn = document.getElementById("nextBtn");
+const restartBtn = document.getElementById("restartBtn");
+
+function renderMath(element) {
+    if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([element]).catch(() => {});
+    }
+}
+
+function showQuestion() {
+    answered = false;
+    const item = questions[current];
+
+    progressEl.textContent =
+        `Câu ${current + 1}/${questions.length}`;
+
+    scoreEl.textContent =
+        `Điểm: ${score}/${questions.length}`;
+
+    progressFill.style.width =
+        `${(current / questions.length) * 100}%`;
+
+    questionEl.innerHTML = item.q;
+    optionsEl.innerHTML = "";
+    feedbackEl.innerHTML = "";
+
+    nextBtn.disabled = true;
+    nextBtn.hidden = false;
+    restartBtn.hidden = true;
+
+    item.options.forEach((option, index) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "answer-btn";
+        btn.innerHTML =
+            `<b>${String.fromCharCode(65 + index)}.</b> ${option}`;
+
+        btn.addEventListener("click", () => chooseAnswer(index));
+        optionsEl.appendChild(btn);
+    });
+
+    renderMath(questionEl);
+    renderMath(optionsEl);
+}
+
+function chooseAnswer(index) {
+    if (answered) return;
+
+    answered = true;
+    const item = questions[current];
+    const buttons = optionsEl.querySelectorAll(".answer-btn");
+    const isCorrect = index === item.answer;
+
+    if (isCorrect) score++;
+
+    buttons.forEach((btn, i) => {
+        btn.disabled = true;
+
+        if (i === item.answer) {
+            btn.classList.add("correct");
+        } else if (i === index) {
+            btn.classList.add("wrong");
+        }
+    });
+
+    const correctLetter = String.fromCharCode(65 + item.answer);
+
+    feedbackEl.innerHTML = `
+        <div class="feedback-box ${
+            isCorrect ? "feedback-correct" : "feedback-wrong"
+        }">
+            <h3>${isCorrect ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</h3>
+            <p><b>Đáp án đúng: ${correctLetter}.</b></p>
+            <p><b>Giải thích:</b> ${item.explanation}</p>
+        </div>
+    `;
+
+    scoreEl.textContent = `Điểm: ${score}/${questions.length}`;
+    nextBtn.disabled = false;
+
+    if (current === questions.length - 1) {
+        nextBtn.textContent = "Xem kết quả";
+    }
+
+    renderMath(feedbackEl);
+}
+
+function nextQuestion() {
+    if (!answered) return;
+
+    if (current < questions.length - 1) {
+        current++;
+        showQuestion();
+    } else {
+        showResult();
+    }
+}
+
+function showResult() {
+    progressEl.textContent = "Hoàn thành";
+    progressFill.style.width = "100%";
+    questionEl.textContent = "Kết quả luyện tập";
+    optionsEl.innerHTML = "";
+
+    let message;
+
+    if (score === questions.length) {
+        message = "Xuất sắc! Bạn đã nắm vững các công thức cơ bản.";
+    } else if (score >= 4) {
+        message = "Khá tốt! Hãy ôn lại những câu bạn trả lời sai.";
+    } else {
+        message = "Hãy xem lại phần lý thuyết rồi thử sức lần nữa nhé!";
+    }
+
+    feedbackEl.innerHTML = `
+        <div class="feedback-box feedback-correct">
+            <h3>Bạn đạt ${score}/${questions.length} câu đúng.</h3>
+            <p>${message}</p>
+        </div>
+    `;
+
+    nextBtn.hidden = true;
+    restartBtn.hidden = false;
+    scoreEl.textContent = `Điểm: ${score}/${questions.length}`;
+}
+
+function restartQuiz() {
+    current = 0;
+    score = 0;
+    showQuestion();
+}
+
+showQuestion();
+</script>
+<!-- KẾT THÚC PHẦN TRẮC NGHIỆM -->
 </main>
 
 <footer>
