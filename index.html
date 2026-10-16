@@ -3,22 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mạch RLC nối tiếp - Vật lí 12</title>
-
-    <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['\\(', '\\)']],
-                displayMath: [['\\[', '\\]']]
-            },
-            chtml: {
-                scale: 1
-            }
-        };
-    </script>
-    <script defer
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
+    <title>Test độ gay 🌈</title>
 
     <style>
         * {
@@ -26,784 +11,197 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #eef4ff;
-            color: #1e293b;
             margin: 0;
-            line-height: 1.8;
-        }
-
-        header {
-            background: #123c69;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
             color: white;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 420px;
+            padding: 30px 24px;
             text-align: center;
-            padding: 28px 15px;
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            box-shadow: 0 10px 40px #0003;
         }
 
-        header h1 {
-            margin: 0 0 8px;
+        h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
         }
 
-        main {
-            max-width: 950px;
-            margin: 25px auto;
-            padding: 0 16px;
+        .emoji {
+            font-size: 65px;
+            margin: 20px 0;
         }
 
-        section {
+        .percent {
+            font-size: 42px;
+            font-weight: bold;
+            margin: 15px;
+        }
+
+        .progress-bg {
+            width: 100%;
+            height: 25px;
+            background: #ffffff40;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #ffffff70;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(
+                90deg,
+                #ff4d6d,
+                #ffbe0b,
+                #06d6a0,
+                #8338ec
+            );
+            transition: width 0.08s linear;
+        }
+
+        #status {
+            min-height: 48px;
+            margin: 20px 0;
+            font-size: 17px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
             background: white;
-            padding: 22px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px #0000000c;
+            color: #6a11cb;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        h2 {
-            color: #1565c0;
-            border-bottom: 2px solid #dbeafe;
-            padding-bottom: 8px;
+        button:hover {
+            transform: scale(1.04);
+            background: #ffe0f0;
         }
 
-        .formula {
-            background: #eaf3ff;
-            padding: 14px;
-            margin: 14px 0;
-            border-left: 4px solid #1565c0;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-size: 19px;
-            text-align: center;
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .note {
-            background: #fff7df;
-            padding: 12px;
-            border-radius: 6px;
-        }
-
-        footer {
-            background: #123c69;
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
-
-        mjx-container {
-            max-width: 100%;
-        }
-
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 24px;
-            }
-
-            section {
-                padding: 16px;
-            }
-
-            .formula {
-                font-size: 17px;
-            }
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
+    <div class="container">
+        <h1>🌈 TEST ĐỘ GAY 🌈</h1>
 
-<header>
-    <h1>MẠCH RLC NỐI TIẾP</h1>
-    <p>Vật lí 12 – Dòng điện xoay chiều</p>
-</header>
+        <div class="emoji" id="emoji">😎</div>
 
-<main>
-
-    <section>
-        <h2>1. Khái niệm và cấu tạo</h2>
-
-        <p>
-            Mạch RLC nối tiếp là mạch điện xoay chiều gồm ba
-            phần tử: điện trở R, cuộn cảm thuần L và tụ điện C
-            mắc nối tiếp với nhau.
-        </p>
-
-        <ul>
-            <li>
-                <b>Điện trở R:</b> tiêu thụ điện năng và biến
-                đổi điện năng thành nhiệt năng.
-            </li>
-            <li>
-                <b>Cuộn cảm thuần L:</b> tạo ra cảm kháng,
-                đặc trưng cho sự cản trở dòng điện xoay chiều.
-            </li>
-            <li>
-                <b>Tụ điện C:</b> tạo ra dung kháng, có khả năng
-                tích trữ năng lượng điện trường.
-            </li>
-        </ul>
-
-        <p>
-            Trong mạch nối tiếp, cường độ dòng điện hiệu dụng
-            qua các phần tử là như nhau.
-        </p>
-
-        <div class="formula">
-            \[
-            I_R=I_L=I_C=I
-            \]
-        </div>
-    </section>
-
-    <section>
-        <h2>2. Các đại lượng đặc trưng</h2>
-
-        <p><b>Tần số góc:</b></p>
-        <div class="formula">
-            \[
-            \omega=2\pi f
-            \]
+        <div class="progress-bg">
+            <div class="progress" id="bar"></div>
         </div>
 
-        <p><b>Cảm kháng của cuộn cảm thuần:</b></p>
-        <div class="formula">
-            \[
-            Z_L=\omega L=2\pi fL
-            \]
+        <div class="percent" id="percent">0%</div>
+
+        <p id="status">Bạn đã sẵn sàng chưa? 👀</p>
+
+        <button id="startBtn" onclick="startTest()">
+            🚀 BẮT ĐẦU ĐO
+        </button>
+
+        <div class="note">
+            ⚠️ Chỉ là trò đùa giải trí, không đánh giá xu hướng tính dục.
         </div>
-
-        <p><b>Dung kháng của tụ điện:</b></p>
-        <div class="formula">
-            \[
-            Z_C=\frac{1}{\omega C}
-            =\frac{1}{2\pi fC}
-            \]
-        </div>
-
-        <p class="note">
-            Trong đó: \(f\) là tần số (Hz), \(\omega\) là tần số
-            góc (rad/s), \(L\) là độ tự cảm (H), \(C\) là điện
-            dung (F). Các đại lượng \(Z_L\), \(Z_C\) có đơn vị
-            ôm (\(\Omega\)).
-        </p>
-    </section>
-
-    <section>
-        <h2>3. Tổng trở của mạch RLC</h2>
-
-        <p>
-            Tổng trở phụ thuộc vào điện trở, cảm kháng và dung
-            kháng của mạch.
-        </p>
-
-        <div class="formula">
-            \[
-            Z=\sqrt{R^2+(Z_L-Z_C)^2}
-            \]
-        </div>
-
-        <p>
-            Thay các biểu thức cảm kháng và dung kháng:
-        </p>
-
-        <div class="formula">
-            \[
-            Z=\sqrt{R^2+
-            \left(\omega L-\frac{1}{\omega C}\right)^2}
-            \]
-        </div>
-    </section>
-
-    <section>
-        <h2>4. Định luật Ôm cho mạch xoay chiều</h2>
-
-        <p><b>Đối với toàn mạch:</b></p>
-        <div class="formula">
-            \[
-            I=\frac{U}{Z}
-            \]
-        </div>
-
-        <p><b>Điện áp hiệu dụng trên từng phần tử:</b></p>
-        <div class="formula">
-            \[
-            U_R=IR
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            U_L=IZ_L=I\omega L
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            U_C=IZ_C=\frac{I}{\omega C}
-            \]
-        </div>
-
-        <p>
-            Điện áp hiệu dụng hai đầu toàn mạch được tính bằng:
-        </p>
-
-        <div class="formula">
-            \[
-            U=\sqrt{U_R^2+(U_L-U_C)^2}
-            \]
-        </div>
-
-        <p class="note">
-            \(I\) là cường độ dòng điện hiệu dụng (A);
-            \(U, U_R, U_L, U_C\) là các điện áp hiệu dụng (V).
-        </p>
-    </section>
-
-    <section>
-        <h2>5. Độ lệch pha giữa điện áp và dòng điện</h2>
-
-        <p>
-            Gọi \(\varphi=\varphi_u-\varphi_i\) là độ lệch pha
-            giữa điện áp toàn mạch và cường độ dòng điện.
-        </p>
-
-        <div class="formula">
-            \[
-            \tan\varphi=\frac{Z_L-Z_C}{R}
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            \cos\varphi=\frac{R}{Z}
-            \]
-        </div>
-
-        <ul>
-            <li>
-                Nếu \(Z_L>Z_C\): \(\varphi>0\), dòng điện
-                trễ pha so với điện áp.
-            </li>
-            <li>
-                Nếu \(Z_L<Z_C\): \(\varphi<0\), dòng điện
-                sớm pha so với điện áp.
-            </li>
-            <li>
-                Nếu \(Z_L=Z_C\): \(\varphi=0\), dòng điện
-                cùng pha với điện áp.
-            </li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>6. Hiện tượng cộng hưởng điện</h2>
-
-        <p>
-            Cộng hưởng điện xảy ra khi cảm kháng bằng dung kháng.
-        </p>
-
-        <div class="formula">
-            \[
-            Z_L=Z_C
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            \omega_0L=\frac{1}{\omega_0C}
-            \]
-        </div>
-
-        <p><b>Tần số góc cộng hưởng:</b></p>
-
-        <div class="formula">
-            \[
-            \omega_0=\frac{1}{\sqrt{LC}}
-            \]
-        </div>
-
-        <p><b>Tần số cộng hưởng:</b></p>
-
-        <div class="formula">
-            \[
-            f_0=\frac{1}{2\pi\sqrt{LC}}
-            \]
-        </div>
-
-        <p><b>Khi xảy ra cộng hưởng:</b></p>
-
-        <div class="formula">
-            \[
-            Z=R
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            I_{\max}=\frac{U}{R}
-            \]
-        </div>
-
-        <ul>
-            <li>Tổng trở của mạch đạt giá trị nhỏ nhất.</li>
-            <li>Cường độ dòng điện đạt giá trị lớn nhất.</li>
-            <li>Điện áp và dòng điện cùng pha.</li>
-        </ul>
-
-        <p class="note">
-            \(I_{\max}\) ở đây là cường độ dòng điện hiệu dụng
-            lớn nhất khi điện áp hiệu dụng không đổi và tần số
-            được điều chỉnh để xảy ra cộng hưởng.
-        </p>
-    </section>
-
-    <section>
-        <h2>7. Công suất của mạch RLC</h2>
-
-        <p><b>Công suất trung bình:</b></p>
-
-        <div class="formula">
-            \[
-            P=UI\cos\varphi
-            \]
-        </div>
-
-        <p><b>Công thức tính công suất khác:</b></p>
-
-        <div class="formula">
-            \[
-            P=I^2R
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            P=\frac{U^2R}{Z^2}
-            \]
-        </div>
-
-        <p><b>Hệ số công suất:</b></p>
-
-        <div class="formula">
-            \[
-            \cos\varphi=\frac{R}{Z}
-            \]
-        </div>
-
-        <p>
-            Công suất trung bình được tính bằng oát (W).
-            Cuộn cảm thuần và tụ điện lý tưởng không tiêu thụ
-            công suất trung bình.
-        </p>
-    </section>
-
-    <section>
-        <h2>8. Bảng tổng hợp công thức</h2>
-
-        <div class="formula">
-            \[
-            \boxed{Z_L=\omega L}
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            \boxed{Z_C=\frac{1}{\omega C}}
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            \boxed{Z=\sqrt{R^2+(Z_L-Z_C)^2}}
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            \boxed{I=\frac{U}{Z}}
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            \boxed{\tan\varphi=\frac{Z_L-Z_C}{R}}
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            \boxed{P=UI\cos\varphi=I^2R}
-            \]
-        </div>
-
-        <div class="formula">
-            \[
-            \boxed{\omega_0=\frac{1}{\sqrt{LC}}}
-            \]
-        </div>
-    </section>
-
-
-<!-- PHẦN TRẮC NGHIỆM TƯƠNG TÁC -->
-<section id="quiz">
-    <h2>9. Trắc nghiệm mạch RLC</h2>
-    <p>Chọn đáp án A, B, C hoặc D. Mỗi câu có một đáp án đúng.</p>
-
-    <div class="quiz-info">
-        <span id="progress">Câu 1/6</span>
-        <span id="score">Điểm: 0/6</span>
     </div>
 
-    <div class="progress-bar">
-        <div id="progressFill"></div>
-    </div>
+    <script>
+        let running = false;
 
-    <h3 id="question"></h3>
-    <div id="options"></div>
+        function startTest() {
+            if (running) return;
+            running = true;
 
-    <div id="feedback" aria-live="polite"></div>
+            const bar = document.getElementById("bar");
+            const percent = document.getElementById("percent");
+            const status = document.getElementById("status");
+            const emoji = document.getElementById("emoji");
+            const btn = document.getElementById("startBtn");
 
-    <button id="nextBtn" type="button" onclick="nextQuestion()"
-        disabled>
-        Câu tiếp theo →
-    </button>
+            btn.disabled = true;
+            btn.textContent = "⏳ ĐANG PHÂN TÍCH...";
+            bar.style.width = "0%";
+            percent.textContent = "0%";
+            emoji.textContent = "🔍";
 
-    <button id="restartBtn" type="button" onclick="restartQuiz()"
-        hidden>
-        Làm lại từ đầu
-    </button>
-</section>
+            let value = 0;
 
-<style>
-    .quiz-info {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        font-weight: bold;
-        color: #1565c0;
-    }
+            const messages = [
+                "Đang quét dữ liệu... 🧐",
+                "Phát hiện năng lượng bí ẩn... 👀",
+                "Hệ thống đang phân tích... 🤖",
+                "Sắp có kết quả rồi... 😱"
+            ];
 
-    .progress-bar {
-        height: 9px;
-        background: #dbeafe;
-        border-radius: 10px;
-        margin: 12px 0 20px;
-        overflow: hidden;
-    }
+            const timer = setInterval(() => {
+                value += Math.floor(Math.random() * 4) + 1;
 
-    #progressFill {
-        height: 100%;
-        width: 0%;
-        background: #1565c0;
-        transition: width 0.3s;
-    }
+                if (value >= 100) {
+                    value = 100;
+                    clearInterval(timer);
 
-    #question {
-        line-height: 1.7;
-    }
+                    // Kết quả ngẫu nhiên chỉ để giải trí
+                    const result = Math.floor(Math.random() * 101);
 
-    .answer-btn {
-        display: block;
-        width: 100%;
-        padding: 14px;
-        margin: 10px 0;
-        text-align: left;
-        border: 2px solid #dbeafe;
-        border-radius: 9px;
-        background: white;
-        color: #1e293b;
-        font-size: 16px;
-        cursor: pointer;
-        line-height: 1.7;
-    }
+                    percent.textContent = result + "%";
+                    bar.style.width = result + "%";
+                    emoji.textContent =
+                        result >= 80 ? "🌈" :
+                        result >= 50 ? "😏" :
+                        result >= 25 ? "😎" : "🗿";
 
-    .answer-btn:hover:not(:disabled) {
-        border-color: #1565c0;
-        background: #f0f7ff;
-    }
+                    status.textContent =
+                        result >= 80 ? "🌈 Hệ thống nổ tung vì quá nhiều màu sắc!" :
+                        result >= 50 ? "🔥 Kết quả khá là đáng nghi nha!" :
+                        result >= 25 ? "👀 Máy quét vẫn còn đang hoang mang!" :
+                        "🗿 Máy quét xin phép im lặng!";
 
-    .answer-btn:disabled {
-        cursor: default;
-        opacity: 1;
-    }
+                    btn.disabled = false;
+                    btn.textContent = "🔄 ĐO LẠI";
+                    running = false;
+                } else {
+                    bar.style.width = value + "%";
+                    percent.textContent = value + "%";
 
-    .answer-btn.correct {
-        border-color: #16a34a;
-        background: #dcfce7;
-        color: #166534;
-    }
-
-    .answer-btn.wrong {
-        border-color: #dc2626;
-        background: #fee2e2;
-        color: #991b1b;
-    }
-
-    #feedback {
-        margin-top: 18px;
-        line-height: 1.8;
-    }
-
-    #feedback:empty {
-        display: none;
-    }
-
-    .feedback-box {
-        padding: 15px;
-        border-radius: 9px;
-    }
-
-    .feedback-correct {
-        background: #dcfce7;
-        color: #166534;
-    }
-
-    .feedback-wrong {
-        background: #fee2e2;
-        color: #991b1b;
-    }
-
-    #nextBtn, #restartBtn {
-        margin-top: 15px;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 8px;
-        background: #1565c0;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    #nextBtn:disabled {
-        background: #94a3b8;
-        cursor: not-allowed;
-    }
-</style>
-
-<script>
-const questions = [
-    {
-        q: "Câu 1. Công thức tính cảm kháng của cuộn cảm thuần là gì?",
-        options: [
-            "\\(Z_L=\\omega L\\)",
-            "\\(Z_L=\\dfrac{1}{\\omega L}\\)",
-            "\\(Z_L=\\omega C\\)",
-            "\\(Z_L=R+L\\)"
-        ],
-        answer: 0,
-        explanation:
-            "Đáp án A đúng vì cảm kháng được tính bằng Z_L = ωL, trong đó ω là tần số góc và L là độ tự cảm. Cảm kháng có đơn vị ôm (Ω)."
-    },
-    {
-        q: "Câu 2. Công thức tính dung kháng của tụ điện là gì?",
-        options: [
-            "\\(Z_C=\\omega C\\)",
-            "\\(Z_C=\\dfrac{1}{\\omega C}\\)",
-            "\\(Z_C=\\omega L\\)",
-            "\\(Z_C=RC\\)"
-        ],
-        answer: 1,
-        explanation:
-            "Đáp án B đúng vì dung kháng Z_C = 1/(ωC). Khi tần số góc ω tăng, dung kháng giảm nếu điện dung C không đổi."
-    },
-    {
-        q: "Câu 3. Tổng trở của mạch RLC nối tiếp được tính theo công thức nào?",
-        options: [
-            "\\(Z=R+Z_L+Z_C\\)",
-            "\\(Z=\\sqrt{R^2+(Z_L+Z_C)^2}\\)",
-            "\\(Z=\\sqrt{R^2+(Z_L-Z_C)^2}\\)",
-            "\\(Z=R(Z_L-Z_C)\\)"
-        ],
-        answer: 2,
-        explanation:
-            "Đáp án C đúng. Điện áp trên R vuông pha với phần điện áp phản kháng tổng hợp (U_L − U_C), nên Z = √[R² + (Z_L − Z_C)²]."
-    },
-    {
-        q: "Câu 4. Mạch RLC nối tiếp xảy ra cộng hưởng khi nào?",
-        options: [
-            "\\(R=Z_L\\)",
-            "\\(R=Z_C\\)",
-            "\\(Z_L=Z_C\\)",
-            "\\(Z=0\\)"
-        ],
-        answer: 2,
-        explanation:
-            "Đáp án C đúng vì cộng hưởng xảy ra khi cảm kháng bằng dung kháng. Khi đó tổng trở Z = R và dòng điện cùng pha với điện áp toàn mạch."
-    },
-    {
-        q: "Câu 5. Khi cộng hưởng và điện áp hiệu dụng U không đổi, cường độ dòng điện hiệu dụng bằng bao nhiêu?",
-        options: [
-            "\\(I=\\dfrac{U}{Z}\\), với Z = R",
-            "\\(I=UR\\)",
-            "\\(I=\\dfrac{R}{U}\\)",
-            "\\(I=0\\)"
-        ],
-        answer: 0,
-        explanation:
-            "Đáp án A đúng. Khi cộng hưởng, Z = R nên theo định luật Ôm: I = U/Z = U/R. Với R không đổi, dòng điện đạt giá trị lớn nhất."
-    },
-    {
-        q: "Câu 6. Công thức tính công suất trung bình của mạch RLC là gì?",
-        options: [
-            "\\(P=UI\\sin\\varphi\\)",
-            "\\(P=UI\\cos\\varphi\\)",
-            "\\(P=U/I\\)",
-            "\\(P=I^2Z\\)"
-        ],
-        answer: 1,
-        explanation:
-            "Đáp án B đúng vì công suất trung bình P = UI cosφ. Với mạch RLC lý tưởng, công suất tiêu thụ trung bình trên điện trở là P = I²R."
-    }
-];
-
-let current = 0;
-let score = 0;
-let answered = false;
-
-const questionEl = document.getElementById("question");
-const optionsEl = document.getElementById("options");
-const feedbackEl = document.getElementById("feedback");
-const progressEl = document.getElementById("progress");
-const scoreEl = document.getElementById("score");
-const progressFill = document.getElementById("progressFill");
-const nextBtn = document.getElementById("nextBtn");
-const restartBtn = document.getElementById("restartBtn");
-
-function renderMath(element) {
-    if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise([element]).catch(() => {});
-    }
-}
-
-function showQuestion() {
-    answered = false;
-    const item = questions[current];
-
-    progressEl.textContent =
-        `Câu ${current + 1}/${questions.length}`;
-
-    scoreEl.textContent =
-        `Điểm: ${score}/${questions.length}`;
-
-    progressFill.style.width =
-        `${(current / questions.length) * 100}%`;
-
-    questionEl.innerHTML = item.q;
-    optionsEl.innerHTML = "";
-    feedbackEl.innerHTML = "";
-
-    nextBtn.disabled = true;
-    nextBtn.hidden = false;
-    restartBtn.hidden = true;
-
-    item.options.forEach((option, index) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "answer-btn";
-        btn.innerHTML =
-            `<b>${String.fromCharCode(65 + index)}.</b> ${option}`;
-
-        btn.addEventListener("click", () => chooseAnswer(index));
-        optionsEl.appendChild(btn);
-    });
-
-    renderMath(questionEl);
-    renderMath(optionsEl);
-}
-
-function chooseAnswer(index) {
-    if (answered) return;
-
-    answered = true;
-    const item = questions[current];
-    const buttons = optionsEl.querySelectorAll(".answer-btn");
-    const isCorrect = index === item.answer;
-
-    if (isCorrect) score++;
-
-    buttons.forEach((btn, i) => {
-        btn.disabled = true;
-
-        if (i === item.answer) {
-            btn.classList.add("correct");
-        } else if (i === index) {
-            btn.classList.add("wrong");
+                    if (value < 30) {
+                        status.textContent = messages[0];
+                    } else if (value < 55) {
+                        status.textContent = messages[1];
+                    } else if (value < 80) {
+                        status.textContent = messages[2];
+                    } else {
+                        status.textContent = messages[3];
+                    }
+                }
+            }, 80);
         }
-    });
-
-    const correctLetter = String.fromCharCode(65 + item.answer);
-
-    feedbackEl.innerHTML = `
-        <div class="feedback-box ${
-            isCorrect ? "feedback-correct" : "feedback-wrong"
-        }">
-            <h3>${isCorrect ? "✓ Chính xác!" : "✗ Chưa chính xác!"}</h3>
-            <p><b>Đáp án đúng: ${correctLetter}.</b></p>
-            <p><b>Giải thích:</b> ${item.explanation}</p>
-        </div>
-    `;
-
-    scoreEl.textContent = `Điểm: ${score}/${questions.length}`;
-    nextBtn.disabled = false;
-
-    if (current === questions.length - 1) {
-        nextBtn.textContent = "Xem kết quả";
-    }
-
-    renderMath(feedbackEl);
-}
-
-function nextQuestion() {
-    if (!answered) return;
-
-    if (current < questions.length - 1) {
-        current++;
-        showQuestion();
-    } else {
-        showResult();
-    }
-}
-
-function showResult() {
-    progressEl.textContent = "Hoàn thành";
-    progressFill.style.width = "100%";
-    questionEl.textContent = "Kết quả luyện tập";
-    optionsEl.innerHTML = "";
-
-    let message;
-
-    if (score === questions.length) {
-        message = "Xuất sắc! Bạn đã nắm vững các công thức cơ bản.";
-    } else if (score >= 4) {
-        message = "Khá tốt! Hãy ôn lại những câu bạn trả lời sai.";
-    } else {
-        message = "Hãy xem lại phần lý thuyết rồi thử sức lần nữa nhé!";
-    }
-
-    feedbackEl.innerHTML = `
-        <div class="feedback-box feedback-correct">
-            <h3>Bạn đạt ${score}/${questions.length} câu đúng.</h3>
-            <p>${message}</p>
-        </div>
-    `;
-
-    nextBtn.hidden = true;
-    restartBtn.hidden = false;
-    scoreEl.textContent = `Điểm: ${score}/${questions.length}`;
-}
-
-function restartQuiz() {
-    current = 0;
-    score = 0;
-    showQuestion();
-}
-
-showQuestion();
-</script>
-<!-- KẾT THÚC PHẦN TRẮC NGHIỆM -->
-</main>
-
-<footer>
-    <p>Ôn tập Vật lí 12 – Mạch RLC nối tiếp</p>
-</footer>
-
+    </script>
 </body>
 </html>
