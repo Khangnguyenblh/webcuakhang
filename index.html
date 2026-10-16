@@ -1,15 +1,212 @@
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Are you ok </title>
-    </head>
-    <body bgcolor="blue" text="white">
-        <h1 
-        class="cc" 
-        style="color:gold;font-size:50px;border:1px solid red;">DCMMMMMMMMMMMMMMMMMMMM</h1>
-        <h1 
-        class="cc">DCMMMMMM</h1>
-        <p>ffffff</p>
-        <img scr="images/wanglin.png" />
-    </body>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu mạch RLC</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef4ff;
+            color: #1e293b;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #123c69;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 20px;
+        }
+
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        h2 {
+            color: #1565c0;
+        }
+
+        .formula {
+            background: #eaf3ff;
+            padding: 12px;
+            border-left: 4px solid #1565c0;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        footer {
+            text-align: center;
+            background: #123c69;
+            color: white;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>GIỚI THIỆU MẠCH RLC NỐI TIẾP</h1>
+    <p>Vật lí 12 – Dòng điện xoay chiều</p>
+</header>
+
+<main>
+
+    <section>
+        <h2>1. Khái niệm mạch RLC</h2>
+        <p>
+            Mạch RLC nối tiếp là mạch điện xoay chiều gồm ba phần tử:
+            điện trở R, cuộn cảm L và tụ điện C mắc nối tiếp.
+        </p>
+        <ul>
+            <li>R: Điện trở, cản trở dòng điện và tiêu thụ điện năng.</li>
+            <li>L: Cuộn cảm, chống lại sự biến thiên của dòng điện.</li>
+            <li>C: Tụ điện, tích và phóng điện trong mạch.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2. Các đại lượng đặc trưng</h2>
+
+        <div class="formula">
+            Cảm kháng: ZL = ωL
+        </div>
+
+        <div class="formula">
+            Dung kháng: ZC = 1/(ωC)
+        </div>
+
+        <div class="formula">
+            Tần số góc: ω = 2πf
+        </div>
+
+        <p>
+            Trong đó: ZL và ZC có đơn vị ôm (Ω);
+            L có đơn vị henry (H);
+            C có đơn vị fara (F);
+            f là tần số (Hz).
+        </p>
+    </section>
+
+    <section>
+        <h2>3. Tổng trở của mạch RLC</h2>
+
+        <div class="formula">
+            Z = √[R² + (ZL - ZC)²]
+        </div>
+
+        <p>
+            Tổng trở Z đặc trưng cho mức độ cản trở dòng điện
+            của toàn bộ mạch RLC nối tiếp.
+        </p>
+    </section>
+
+    <section>
+        <h2>4. Định luật Ôm cho mạch xoay chiều</h2>
+
+        <div class="formula">
+            I = U/Z
+        </div>
+
+        <div class="formula">
+            UR = IR
+        </div>
+
+        <div class="formula">
+            UL = IZL
+        </div>
+
+        <div class="formula">
+            UC = IZC
+        </div>
+
+        <p>
+            I là cường độ dòng điện hiệu dụng (A);
+            U là điện áp hiệu dụng toàn mạch (V).
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Độ lệch pha giữa điện áp và dòng điện</h2>
+
+        <div class="formula">
+            tan φ = (ZL - ZC)/R
+        </div>
+
+        <ul>
+            <li>ZL &gt; ZC: dòng điện trễ pha hơn điện áp.</li>
+            <li>ZL &lt; ZC: dòng điện sớm pha hơn điện áp.</li>
+            <li>ZL = ZC: dòng điện cùng pha với điện áp.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>6. Hiện tượng cộng hưởng điện</h2>
+
+        <p>Cộng hưởng xảy ra khi cảm kháng bằng dung kháng:</p>
+
+        <div class="formula">
+            ZL = ZC
+        </div>
+
+        <div class="formula">
+            ωL = 1/(ωC)
+        </div>
+
+        <div class="formula">
+            ω₀ = 1/√(LC)
+        </div>
+
+        <div class="formula">
+            Z = R; Imax = U/R
+        </div>
+
+        <p>
+            Khi cộng hưởng, tổng trở đạt giá trị nhỏ nhất
+            và cường độ dòng điện đạt giá trị lớn nhất
+            nếu điện áp hiệu dụng không đổi.
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Công suất của mạch RLC</h2>
+
+        <div class="formula">
+            P = UI cos φ
+        </div>
+
+        <div class="formula">
+            P = I²R
+        </div>
+
+        <div class="formula">
+            cos φ = R/Z
+        </div>
+
+        <p>
+            P là công suất trung bình của mạch, đơn vị watt (W).
+            cos φ là hệ số công suất.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Ôn tập Vật lí 12 – Mạch RLC nối tiếp</p>
+</footer>
+
+</body>
 </html>
