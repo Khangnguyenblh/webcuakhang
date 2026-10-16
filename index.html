@@ -1,56 +1,110 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới thiệu mạch RLC</title>
+    <title>Mạch RLC nối tiếp - Vật lí 12</title>
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            chtml: {
+                scale: 1
+            }
+        };
+    </script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background: #eef4ff;
             color: #1e293b;
             margin: 0;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         header {
             background: #123c69;
             color: white;
             text-align: center;
-            padding: 25px;
+            padding: 28px 15px;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
         }
 
         main {
-            max-width: 900px;
+            max-width: 950px;
             margin: 25px auto;
-            padding: 20px;
+            padding: 0 16px;
         }
 
         section {
             background: white;
-            padding: 20px;
+            padding: 22px;
             margin-bottom: 20px;
             border-radius: 12px;
+            box-shadow: 0 3px 10px #0000000c;
         }
 
         h2 {
             color: #1565c0;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 8px;
         }
 
         .formula {
             background: #eaf3ff;
-            padding: 12px;
+            padding: 14px;
+            margin: 14px 0;
             border-left: 4px solid #1565c0;
-            margin: 10px 0;
-            font-size: 18px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 19px;
+            text-align: center;
+        }
+
+        .note {
+            background: #fff7df;
+            padding: 12px;
+            border-radius: 6px;
         }
 
         footer {
-            text-align: center;
             background: #123c69;
             color: white;
+            text-align: center;
             padding: 15px;
+        }
+
+        mjx-container {
+            max-width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            section {
+                padding: 16px;
+            }
+
+            .formula {
+                font-size: 17px;
+            }
         }
     </style>
 </head>
@@ -58,147 +112,334 @@
 <body>
 
 <header>
-    <h1>GIỚI THIỆU MẠCH RLC NỐI TIẾP</h1>
+    <h1>MẠCH RLC NỐI TIẾP</h1>
     <p>Vật lí 12 – Dòng điện xoay chiều</p>
 </header>
 
 <main>
 
     <section>
-        <h2>1. Khái niệm mạch RLC</h2>
+        <h2>1. Khái niệm và cấu tạo</h2>
+
         <p>
-            Mạch RLC nối tiếp là mạch điện xoay chiều gồm ba phần tử:
-            điện trở R, cuộn cảm L và tụ điện C mắc nối tiếp.
+            Mạch RLC nối tiếp là mạch điện xoay chiều gồm ba
+            phần tử: điện trở R, cuộn cảm thuần L và tụ điện C
+            mắc nối tiếp với nhau.
         </p>
+
         <ul>
-            <li>R: Điện trở, cản trở dòng điện và tiêu thụ điện năng.</li>
-            <li>L: Cuộn cảm, chống lại sự biến thiên của dòng điện.</li>
-            <li>C: Tụ điện, tích và phóng điện trong mạch.</li>
+            <li>
+                <b>Điện trở R:</b> tiêu thụ điện năng và biến
+                đổi điện năng thành nhiệt năng.
+            </li>
+            <li>
+                <b>Cuộn cảm thuần L:</b> tạo ra cảm kháng,
+                đặc trưng cho sự cản trở dòng điện xoay chiều.
+            </li>
+            <li>
+                <b>Tụ điện C:</b> tạo ra dung kháng, có khả năng
+                tích trữ năng lượng điện trường.
+            </li>
         </ul>
+
+        <p>
+            Trong mạch nối tiếp, cường độ dòng điện hiệu dụng
+            qua các phần tử là như nhau.
+        </p>
+
+        <div class="formula">
+            \[
+            I_R=I_L=I_C=I
+            \]
+        </div>
     </section>
 
     <section>
         <h2>2. Các đại lượng đặc trưng</h2>
 
+        <p><b>Tần số góc:</b></p>
         <div class="formula">
-            Cảm kháng: ZL = ωL
+            \[
+            \omega=2\pi f
+            \]
         </div>
 
+        <p><b>Cảm kháng của cuộn cảm thuần:</b></p>
         <div class="formula">
-            Dung kháng: ZC = 1/(ωC)
+            \[
+            Z_L=\omega L=2\pi fL
+            \]
         </div>
 
+        <p><b>Dung kháng của tụ điện:</b></p>
         <div class="formula">
-            Tần số góc: ω = 2πf
+            \[
+            Z_C=\frac{1}{\omega C}
+            =\frac{1}{2\pi fC}
+            \]
         </div>
 
-        <p>
-            Trong đó: ZL và ZC có đơn vị ôm (Ω);
-            L có đơn vị henry (H);
-            C có đơn vị fara (F);
-            f là tần số (Hz).
+        <p class="note">
+            Trong đó: \(f\) là tần số (Hz), \(\omega\) là tần số
+            góc (rad/s), \(L\) là độ tự cảm (H), \(C\) là điện
+            dung (F). Các đại lượng \(Z_L\), \(Z_C\) có đơn vị
+            ôm (\(\Omega\)).
         </p>
     </section>
 
     <section>
         <h2>3. Tổng trở của mạch RLC</h2>
 
+        <p>
+            Tổng trở phụ thuộc vào điện trở, cảm kháng và dung
+            kháng của mạch.
+        </p>
+
         <div class="formula">
-            Z = √[R² + (ZL - ZC)²]
+            \[
+            Z=\sqrt{R^2+(Z_L-Z_C)^2}
+            \]
         </div>
 
         <p>
-            Tổng trở Z đặc trưng cho mức độ cản trở dòng điện
-            của toàn bộ mạch RLC nối tiếp.
+            Thay các biểu thức cảm kháng và dung kháng:
         </p>
+
+        <div class="formula">
+            \[
+            Z=\sqrt{R^2+
+            \left(\omega L-\frac{1}{\omega C}\right)^2}
+            \]
+        </div>
     </section>
 
     <section>
         <h2>4. Định luật Ôm cho mạch xoay chiều</h2>
 
+        <p><b>Đối với toàn mạch:</b></p>
         <div class="formula">
-            I = U/Z
+            \[
+            I=\frac{U}{Z}
+            \]
+        </div>
+
+        <p><b>Điện áp hiệu dụng trên từng phần tử:</b></p>
+        <div class="formula">
+            \[
+            U_R=IR
+            \]
         </div>
 
         <div class="formula">
-            UR = IR
+            \[
+            U_L=IZ_L=I\omega L
+            \]
         </div>
 
         <div class="formula">
-            UL = IZL
-        </div>
-
-        <div class="formula">
-            UC = IZC
+            \[
+            U_C=IZ_C=\frac{I}{\omega C}
+            \]
         </div>
 
         <p>
-            I là cường độ dòng điện hiệu dụng (A);
-            U là điện áp hiệu dụng toàn mạch (V).
+            Điện áp hiệu dụng hai đầu toàn mạch được tính bằng:
+        </p>
+
+        <div class="formula">
+            \[
+            U=\sqrt{U_R^2+(U_L-U_C)^2}
+            \]
+        </div>
+
+        <p class="note">
+            \(I\) là cường độ dòng điện hiệu dụng (A);
+            \(U, U_R, U_L, U_C\) là các điện áp hiệu dụng (V).
         </p>
     </section>
 
     <section>
         <h2>5. Độ lệch pha giữa điện áp và dòng điện</h2>
 
+        <p>
+            Gọi \(\varphi=\varphi_u-\varphi_i\) là độ lệch pha
+            giữa điện áp toàn mạch và cường độ dòng điện.
+        </p>
+
         <div class="formula">
-            tan φ = (ZL - ZC)/R
+            \[
+            \tan\varphi=\frac{Z_L-Z_C}{R}
+            \]
+        </div>
+
+        <div class="formula">
+            \[
+            \cos\varphi=\frac{R}{Z}
+            \]
         </div>
 
         <ul>
-            <li>ZL &gt; ZC: dòng điện trễ pha hơn điện áp.</li>
-            <li>ZL &lt; ZC: dòng điện sớm pha hơn điện áp.</li>
-            <li>ZL = ZC: dòng điện cùng pha với điện áp.</li>
+            <li>
+                Nếu \(Z_L>Z_C\): \(\varphi>0\), dòng điện
+                trễ pha so với điện áp.
+            </li>
+            <li>
+                Nếu \(Z_L<Z_C\): \(\varphi<0\), dòng điện
+                sớm pha so với điện áp.
+            </li>
+            <li>
+                Nếu \(Z_L=Z_C\): \(\varphi=0\), dòng điện
+                cùng pha với điện áp.
+            </li>
         </ul>
     </section>
 
     <section>
         <h2>6. Hiện tượng cộng hưởng điện</h2>
 
-        <p>Cộng hưởng xảy ra khi cảm kháng bằng dung kháng:</p>
-
-        <div class="formula">
-            ZL = ZC
-        </div>
-
-        <div class="formula">
-            ωL = 1/(ωC)
-        </div>
-
-        <div class="formula">
-            ω₀ = 1/√(LC)
-        </div>
-
-        <div class="formula">
-            Z = R; Imax = U/R
-        </div>
-
         <p>
-            Khi cộng hưởng, tổng trở đạt giá trị nhỏ nhất
-            và cường độ dòng điện đạt giá trị lớn nhất
-            nếu điện áp hiệu dụng không đổi.
+            Cộng hưởng điện xảy ra khi cảm kháng bằng dung kháng.
+        </p>
+
+        <div class="formula">
+            \[
+            Z_L=Z_C
+            \]
+        </div>
+
+        <div class="formula">
+            \[
+            \omega_0L=\frac{1}{\omega_0C}
+            \]
+        </div>
+
+        <p><b>Tần số góc cộng hưởng:</b></p>
+
+        <div class="formula">
+            \[
+            \omega_0=\frac{1}{\sqrt{LC}}
+            \]
+        </div>
+
+        <p><b>Tần số cộng hưởng:</b></p>
+
+        <div class="formula">
+            \[
+            f_0=\frac{1}{2\pi\sqrt{LC}}
+            \]
+        </div>
+
+        <p><b>Khi xảy ra cộng hưởng:</b></p>
+
+        <div class="formula">
+            \[
+            Z=R
+            \]
+        </div>
+
+        <div class="formula">
+            \[
+            I_{\max}=\frac{U}{R}
+            \]
+        </div>
+
+        <ul>
+            <li>Tổng trở của mạch đạt giá trị nhỏ nhất.</li>
+            <li>Cường độ dòng điện đạt giá trị lớn nhất.</li>
+            <li>Điện áp và dòng điện cùng pha.</li>
+        </ul>
+
+        <p class="note">
+            \(I_{\max}\) ở đây là cường độ dòng điện hiệu dụng
+            lớn nhất khi điện áp hiệu dụng không đổi và tần số
+            được điều chỉnh để xảy ra cộng hưởng.
         </p>
     </section>
 
     <section>
         <h2>7. Công suất của mạch RLC</h2>
 
+        <p><b>Công suất trung bình:</b></p>
+
         <div class="formula">
-            P = UI cos φ
+            \[
+            P=UI\cos\varphi
+            \]
+        </div>
+
+        <p><b>Công thức tính công suất khác:</b></p>
+
+        <div class="formula">
+            \[
+            P=I^2R
+            \]
         </div>
 
         <div class="formula">
-            P = I²R
+            \[
+            P=\frac{U^2R}{Z^2}
+            \]
         </div>
 
+        <p><b>Hệ số công suất:</b></p>
+
         <div class="formula">
-            cos φ = R/Z
+            \[
+            \cos\varphi=\frac{R}{Z}
+            \]
         </div>
 
         <p>
-            P là công suất trung bình của mạch, đơn vị watt (W).
-            cos φ là hệ số công suất.
+            Công suất trung bình được tính bằng oát (W).
+            Cuộn cảm thuần và tụ điện lý tưởng không tiêu thụ
+            công suất trung bình.
         </p>
+    </section>
+
+    <section>
+        <h2>8. Bảng tổng hợp công thức</h2>
+
+        <div class="formula">
+            \[
+            \boxed{Z_L=\omega L}
+            \]
+        </div>
+
+        <div class="formula">
+            \[
+            \boxed{Z_C=\frac{1}{\omega C}}
+            \]
+        </div>
+
+        <div class="formula">
+            \[
+            \boxed{Z=\sqrt{R^2+(Z_L-Z_C)^2}}
+            \]
+        </div>
+
+        <div class="formula">
+            \[
+            \boxed{I=\frac{U}{Z}}
+            \]
+        </div>
+
+        <div class="formula">
+            \[
+            \boxed{\tan\varphi=\frac{Z_L-Z_C}{R}}
+            \]
+        </div>
+
+        <div class="formula">
+            \[
+            \boxed{P=UI\cos\varphi=I^2R}
+            \]
+        </div>
+
+        <div class="formula">
+            \[
+            \boxed{\omega_0=\frac{1}{\sqrt{LC}}}
+            \]
+        </div>
     </section>
 
 </main>
